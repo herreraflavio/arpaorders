@@ -16,6 +16,10 @@ async function googleSearch(query, index, error_logs_path) {
     },
   ]);
 
+  test = JSON.parse(data);
+
+  console.log(test[0].keyword);
+
   try {
     const response = await axios.post(
       "https://api.dataforseo.com/v3/serp/google/organic/live/advanced",
@@ -31,10 +35,17 @@ async function googleSearch(query, index, error_logs_path) {
     let urls = [];
     let urlArray = [];
 
-    if (
-      !response.data.tasks[0].result[0].items ||
-      response.data.tasks[0].result[0].spell != null
-    ) {
+    // if (
+    //   !response.data.tasks[0].result[0].items ||
+    //   response.data.tasks[0].result[0].spell != null
+    // ) {
+    //   console.log("No results found for", query);
+    //   urls.push({ query: query, name: `query${index}`, urls: [] });
+    //   return urls;
+    // }
+    console.log(response.data.tasks[0]);
+    // seems dataforseo has updated the way a search result with or with no search items is determined
+    if (!response.data.tasks[0].result[0].items) {
       console.log("No results found for", query);
       urls.push({ query: query, name: `query${index}`, urls: [] });
       return urls;

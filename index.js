@@ -18,10 +18,10 @@ process.on("unhandledRejection", (reason, promise) => {
 
 (async () => {
   try {
-    const start = 9000;
-    const limit = 9010;
+    const start = 117;
+    const limit = 117;
 
-    const saveResults = `arpa-orders/arpa-orders-final-${start}-${limit}/results/`;
+    const saveResults = `${bucketName}/arpa-orders-final-${start}-${limit}/results/`;
     const error_logs_path = `${saveResults}error_logs/`;
 
     const fileDataPath = "./files.json";
@@ -58,7 +58,7 @@ process.on("unhandledRejection", (reason, promise) => {
       error_logs_path
     );
 
-    const outputPath = `arpa-orders/arpa-orders-final-${start}-${limit}/files-updated`;
+    const outputPath = `${bucketName}/arpa-orders-final-${start}-${limit}/files-updated`;
     const downloadResults = await processUrls(
       results,
       start,
